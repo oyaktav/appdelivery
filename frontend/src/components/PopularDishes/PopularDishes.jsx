@@ -6,8 +6,8 @@ const PopularDishes = ({ dishes, addToCart }) => {
   return (
     <div className="popular-dishes-section">
       <div className="section-header">
-        <h2>Popular Dishes</h2>
-        <button className="view-all-btn">View all</button>
+        <h2>Restaurantes Populares</h2>
+        <button className="view-all-btn">Ver todos</button>
       </div>
       
       <div className="dishes-grid">

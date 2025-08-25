@@ -8,43 +8,43 @@ const Sidebar = () => {
   const menuItems = [
     {
       icon: '🏠',
-      label: 'Dashboard',
+      label: 'Início',
       path: '/',
       active: location.pathname === '/'
     },
     {
       icon: '🍽️',
-      label: 'Food Order',
+      label: 'Pedidos',
       path: '/orders',
       active: location.pathname === '/orders'
     },
     {
       icon: '❤️',
-      label: 'Favorite',
+      label: 'Favoritos',
       path: '/favorites',
       active: location.pathname === '/favorites'
     },
     {
       icon: '💬',
-      label: 'Message',
+      label: 'Mensagens',
       path: '/messages',
       active: location.pathname === '/messages'
     },
     {
       icon: '📋',
-      label: 'Order History',
+      label: 'Histórico',
       path: '/history',
       active: location.pathname === '/history'
     },
     {
       icon: '💳',
-      label: 'Bills',
+      label: 'Pagamentos',
       path: '/bills',
       active: location.pathname === '/bills'
     },
     {
       icon: '⚙️',
-      label: 'Setting',
+      label: 'Configurações',
       path: '/settings',
       active: location.pathname === '/settings'
     }
@@ -73,14 +73,7 @@ const Sidebar = () => {
       </nav>
 
       <div className="sidebar-footer">
-        <div className="upgrade-card">
-          <div className="upgrade-content">
-            <h3>Upgrade your Account to Get Free Voucher</h3>
-            <button className="btn btn-primary upgrade-btn">
-              Upgrade
-            </button>
-          </div>
-        </div>
+        {/* Removido o card de upgrade */}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const Header = ({ user, searchTerm, onSearchChange }) => {
       <div className="header-content">
         <div className="header-left">
           <div className="greeting">
-            <h2>Hello, {user.name}</h2>
+            <h2>Olá, {user.name}</h2>
           </div>
         </div>
 
@@ -17,7 +17,7 @@ const Header = ({ user, searchTerm, onSearchChange }) => {
               <span className="search-icon">🔍</span>
               <input
                 type="text"
-                placeholder="What do you want eat today..."
+                placeholder="O que você quer comer hoje..."
                 value={searchTerm}
                 onChange={(e) => onSearchChange(e.target.value)}
                 className="search-input"

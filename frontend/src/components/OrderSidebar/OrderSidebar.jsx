@@ -24,7 +24,7 @@ const OrderSidebar = ({
         onClick={onToggle}
       >
         <span className="toggle-icon">📋</span>
-        <span className="toggle-text">Order Menu</span>
+        <span className="toggle-text">Pedido</span>
         {cart.length > 0 && (
           <span className="cart-count">{cart.length}</span>
         )}
@@ -33,11 +33,11 @@ const OrderSidebar = ({
       {/* Sidebar */}
       <div className={`order-sidebar ${isOpen ? 'open' : ''}`}>
         <div className="order-sidebar-header">
-          <h3>Your Address</h3>
+          <h3>Seu Endereço</h3>
           <div className="address-info">
             <div className="address-text">
-              <p className="address-name">Elm Street, 23</p>
-              <p className="address-detail">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+              <p className="address-name">Rua das Flores, 123</p>
+              <p className="address-detail">Bairro Centro - São Paulo, SP</p>
             </div>
             <div className="address-actions">
               <button className="btn-icon">📝</button>
@@ -47,11 +47,11 @@ const OrderSidebar = ({
         </div>
 
         <div className="order-menu-section">
-          <h3>Order Menu</h3>
+          <h3>Seu Pedido</h3>
           
           {cart.length === 0 ? (
             <div className="empty-cart">
-              <p>Your cart is empty</p>
+              <p>Seu carrinho está vazio</p>
             </div>
           ) : (
             <div className="order-items">
@@ -95,14 +95,14 @@ const OrderSidebar = ({
             <div className="coupon-section">
               <div className="coupon-input">
                 <span className="coupon-icon">🎫</span>
-                <span>Have a coupon code?</span>
+                <span>Tem um cupom de desconto?</span>
                 <button className="coupon-arrow">→</button>
               </div>
             </div>
 
             <div className="order-summary">
               <div className="summary-row">
-                <span>Service</span>
+                <span>Taxa de Entrega</span>
                 <span>+ {formatPrice(serviceFee)}</span>
               </div>
               <div className="summary-row total">
@@ -113,7 +113,7 @@ const OrderSidebar = ({
 
             <div className="balance-section">
               <div className="balance-info">
-                <span className="balance-label">Your Balance</span>
+                <span className="balance-label">Seu Saldo</span>
                 <div className="balance-amount">
                   <span className="balance-value">{formatPrice(userBalance)}</span>
                   <div className="balance-actions">
@@ -125,7 +125,7 @@ const OrderSidebar = ({
             </div>
 
             <button className="checkout-btn">
-              Checkout
+              Finalizar Pedido
             </button>
           </>
         )}

@@ -48,7 +48,7 @@ const Dashboard = ({ restaurants, searchTerm, selectedCategory, onCategoryChange
   const recentDishes = filteredDishes.slice(-6);
 
   if (loading) {
-    return <div className="loading">Loading delicious food...</div>;
+    return <div className="loading">Carregando restaurantes...</div>;
   }
 
   return (

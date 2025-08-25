@@ -3,20 +3,20 @@ import './CategoryFilter.css';
 
 const CategoryFilter = ({ selectedCategory, onCategoryChange }) => {
   const categories = [
-    { id: 'all', name: 'All', icon: '🍽️' },
-    { id: 'bakery', name: 'Bakery', icon: '🧁' },
-    { id: 'burger', name: 'Burger', icon: '🍔' },
-    { id: 'beverage', name: 'Beverage', icon: '🥤' },
-    { id: 'chicken', name: 'Chicken', icon: '🍗' },
+    { id: 'all', name: 'Todos', icon: '🍽️' },
+    { id: 'bakery', name: 'Padaria', icon: '🧁' },
+    { id: 'burger', name: 'Hambúrguer', icon: '🍔' },
+    { id: 'beverage', name: 'Bebidas', icon: '🥤' },
+    { id: 'chicken', name: 'Frango', icon: '🍗' },
     { id: 'pizza', name: 'Pizza', icon: '🍕' },
-    { id: 'seafood', name: 'Seafood', icon: '🦐' }
+    { id: 'seafood', name: 'Frutos do Mar', icon: '🦐' }
   ];
 
   return (
     <div className="category-section">
       <div className="section-header">
-        <h2>Category</h2>
-        <button className="view-all-btn">View all</button>
+        <h2>Categorias</h2>
+        <button className="view-all-btn">Ver todos</button>
       </div>
       
       <div className="category-grid">

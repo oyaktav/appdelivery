@@ -9,8 +9,8 @@ const RecentOrders = ({ dishes, addToCart }) => {
   return (
     <div className="recent-orders-section">
       <div className="section-header">
-        <h2>Recent Order</h2>
-        <button className="view-all-btn">View all</button>
+        <h2>Pedidos Recentes</h2>
+        <button className="view-all-btn">Ver todos</button>
       </div>
       
       <div className="recent-orders-grid">
