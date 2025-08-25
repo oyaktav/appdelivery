@@ -62,7 +62,7 @@ const Dashboard = ({ restaurants, searchTerm, selectedCategory, onCategoryChange
         />
         
         <PopularDishes 
-          dishes={popularDishes}
+          restaurants={restaurants}
           addToCart={addToCart}
         />
         

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from './components/Header/Header';
 import Dashboard from './pages/Dashboard/Dashboard';
 import RestaurantMenu from './pages/RestaurantMenu/RestaurantMenu';
+import Payment from './pages/Payment/Payment';
+import PaymentSuccess from './pages/PaymentSuccess/PaymentSuccess';
 import OrderSidebar from './components/OrderSidebar/OrderSidebar';
 import './App.css';
 
@@ -73,6 +75,15 @@ function App() {
     setIsOrderSidebarOpen(!isOrderSidebarOpen);
   };
 
+  const handleCheckout = () => {
+    setIsOrderSidebarOpen(false);
+    window.location.href = '/payment';
+  };
+
+  const handlePaymentComplete = () => {
+    setCart([]);
+  };
+
   const getTotalItems = () => {
     return cart.reduce((total, item) => total + item.quantity, 0);
   };
@@ -90,6 +101,8 @@ function App() {
   };
 
   return (
+    <Router>
+      <div className="app">
     <Router>
       <div className="app">
         <Sidebar />
@@ -121,6 +134,22 @@ function App() {
                   />
                 } 
               />
+              <Route 
+                path="/payment" 
+                element={
+                  <Payment 
+                    cart={cart}
+                    totalPrice={getTotalPrice()}
+                    serviceFee={getServiceFee()}
+                    finalTotal={getFinalTotal()}
+                    onPaymentComplete={handlePaymentComplete}
+                  />
+                } 
+              />
+              <Route 
+                path="/payment-success" 
+                element={<PaymentSuccess />} 
+              />
             </Routes>
           </div>
         </div>
@@ -135,8 +164,9 @@ function App() {
           serviceFee={getServiceFee()}
           finalTotal={getFinalTotal()}
           userBalance={user.balance}
+          onCheckout={handleCheckout}
         />
-      </div>
+        <OrderSidebar
     </Router>
   );
 }

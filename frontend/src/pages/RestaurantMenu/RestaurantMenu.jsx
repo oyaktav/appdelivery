@@ -57,6 +57,18 @@ const RestaurantMenu = ({ addToCart }) => {
     return categoryMap[category] || category;
   };
 
+  const groupedDishes = () => {
+    const groups = {};
+    filteredDishes.forEach(dish => {
+      const category = dish.category;
+      if (!groups[category]) {
+        groups[category] = [];
+      }
+      groups[category].push(dish);
+    });
+    return groups;
+  };
+
   if (loading) {
     return <div className="loading">Carregando cardápio...</div>;
   }
@@ -67,13 +79,10 @@ const RestaurantMenu = ({ addToCart }) => {
 
   return (
     <div className="restaurant-menu">
-      <div className="breadcrumb">
-        <Link to="/" className="breadcrumb-link">Início</Link>
-        <span className="breadcrumb-separator">›</span>
-        <span className="breadcrumb-current">{restaurant.name}</span>
-      </div>
-
       <div className="restaurant-header">
+        <button className="back-btn">
+          <span>←</span>
+        </button>
         <div className="restaurant-image">
           <img 
             src={restaurant.image || 'https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'} 
@@ -82,56 +91,58 @@ const RestaurantMenu = ({ addToCart }) => {
         </div>
         <div className="restaurant-info">
           <h1 className="restaurant-name">{restaurant.name}</h1>
-          <p className="restaurant-description">{restaurant.description}</p>
-          <div className="restaurant-meta">
-            <div className="meta-item">
-              <span className="meta-icon">📍</span>
-              <span>{restaurant.address || 'Endereço não informado'}</span>
-            </div>
-            <div className="meta-item">
-              <span className="meta-icon">⏱️</span>
-              <span>{restaurant.delivery_time} min</span>
-            </div>
-            <div className="meta-item">
-              <span className="meta-icon">⭐</span>
-              <span>4.8 (120+ avaliações)</span>
-            </div>
+          <div className="restaurant-rating">
+            <span className="rating-stars">⭐ 4.7</span>
+            <span className="rating-count">Free</span>
+            <span className="delivery-time">🕒 {restaurant.delivery_time} min</span>
           </div>
         </div>
       </div>
 
-      <div className="menu-section">
-        <div className="menu-header">
-          <h2>Cardápio</h2>
-          <div className="category-filters">
-            {getUniqueCategories().map(category => (
-              <button
-                key={category}
-                className={`category-filter ${selectedCategory === category ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {getCategoryDisplayName(category)}
-              </button>
-            ))}
-          </div>
+      <div className="menu-categories">
+        <div className="categories-scroll">
+          {getUniqueCategories().map(category => (
+            <button
+              key={category}
+              className={`category-chip ${selectedCategory === category ? 'active' : ''}`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {getCategoryDisplayName(category)}
+            </button>
+          ))}
         </div>
+      </div>
 
-        {filteredDishes.length === 0 ? (
-          <div className="no-dishes">
-            <p>Nenhum prato encontrado nesta categoria.</p>
+      <div className="menu-content">
+        {Object.entries(groupedDishes()).map(([category, categoryDishes]) => (
+          <div key={category} className="category-section">
+            <h2 className="category-title">{getCategoryDisplayName(category)} ({categoryDishes.length})</h2>
+            <div className="dishes-list">
+              {categoryDishes.map(dish => (
+                <div key={dish.id} className="dish-item">
+                  <div className="dish-info">
+                    <h3 className="dish-name">{dish.name}</h3>
+                    <p className="dish-description">{dish.description}</p>
+                    <div className="dish-price">R$ {parseFloat(dish.price).toFixed(2)}</div>
+                  </div>
+                  <div className="dish-image-container">
+                    <img 
+                      src={dish.image || 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1'} 
+                      alt={dish.name}
+                      className="dish-image"
+                    />
+                    <button 
+                      className="add-btn"
+                      onClick={() => addToCart(dish, restaurant.name)}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        ) : (
-          <div className="dishes-grid">
-            {filteredDishes.map(dish => (
-              <DishCard
-                key={dish.id}
-                dish={dish}
-                onAddToCart={() => addToCart(dish, restaurant.name)}
-                showDiscount={false}
-              />
-            ))}
-          </div>
-        )}
+        ))}
       </div>
     </div>
   );

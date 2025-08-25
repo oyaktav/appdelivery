@@ -10,7 +10,8 @@ const OrderSidebar = ({
   totalPrice, 
   serviceFee, 
   finalTotal, 
-  userBalance 
+  userBalance,
+  onCheckout 
 }) => {
   const formatPrice = (price) => {
     return `R$ ${price.toFixed(2)}`;
@@ -23,8 +24,8 @@ const OrderSidebar = ({
         className={`order-toggle-btn ${isOpen ? 'open' : ''}`}
         onClick={onToggle}
       >
-        <span className="toggle-icon">📋</span>
-        <span className="toggle-text">Pedido</span>
+        <span className="toggle-icon">🛒</span>
+        <span className="toggle-text">Carrinho</span>
         {cart.length > 0 && (
           <span className="cart-count">{cart.length}</span>
         )}
@@ -33,25 +34,18 @@ const OrderSidebar = ({
       {/* Sidebar */}
       <div className={`order-sidebar ${isOpen ? 'open' : ''}`}>
         <div className="order-sidebar-header">
-          <h3>Seu Endereço</h3>
-          <div className="address-info">
-            <div className="address-text">
-              <p className="address-name">Rua das Flores, 123</p>
-              <p className="address-detail">Bairro Centro - São Paulo, SP</p>
-            </div>
-            <div className="address-actions">
-              <button className="btn-icon">📝</button>
-              <button className="btn-icon">📍</button>
-            </div>
+          <div className="sidebar-title">
+            <h3>Carrinho</h3>
+            <button className="close-btn" onClick={onToggle}>×</button>
           </div>
         </div>
 
         <div className="order-menu-section">
-          <h3>Seu Pedido</h3>
-          
           {cart.length === 0 ? (
             <div className="empty-cart">
+              <div className="empty-cart-icon">🛒</div>
               <p>Seu carrinho está vazio</p>
+              <span>Adicione itens para começar</span>
             </div>
           ) : (
             <div className="order-items">
@@ -66,19 +60,19 @@ const OrderSidebar = ({
                   <div className="item-details">
                     <h4>{item.dish.name}</h4>
                     <div className="item-price">
-                      + {formatPrice(parseFloat(item.dish.price))}
+                      {formatPrice(parseFloat(item.dish.price))}
                     </div>
                   </div>
                   <div className="item-quantity">
                     <button 
-                      className="quantity-btn"
+                      className="quantity-btn minus"
                       onClick={() => onUpdateQuantity(item.dish.id, item.quantity - 1)}
                     >
                       -
                     </button>
                     <span className="quantity">{item.quantity}</span>
                     <button 
-                      className="quantity-btn"
+                      className="quantity-btn plus"
                       onClick={() => onUpdateQuantity(item.dish.id, item.quantity + 1)}
                     >
                       +
@@ -92,18 +86,14 @@ const OrderSidebar = ({
 
         {cart.length > 0 && (
           <>
-            <div className="coupon-section">
-              <div className="coupon-input">
-                <span className="coupon-icon">🎫</span>
-                <span>Tem um cupom de desconto?</span>
-                <button className="coupon-arrow">→</button>
-              </div>
-            </div>
-
             <div className="order-summary">
               <div className="summary-row">
+                <span>Subtotal</span>
+                <span>{formatPrice(totalPrice)}</span>
+              </div>
+              <div className="summary-row">
                 <span>Taxa de Entrega</span>
-                <span>+ {formatPrice(serviceFee)}</span>
+                <span>{formatPrice(serviceFee)}</span>
               </div>
               <div className="summary-row total">
                 <span>Total</span>
@@ -111,22 +101,11 @@ const OrderSidebar = ({
               </div>
             </div>
 
-            <div className="balance-section">
-              <div className="balance-info">
-                <span className="balance-label">Seu Saldo</span>
-                <div className="balance-amount">
-                  <span className="balance-value">{formatPrice(userBalance)}</span>
-                  <div className="balance-actions">
-                    <button className="balance-btn">💳</button>
-                    <button className="balance-btn">💰</button>
-                  </div>
-                </div>
-              </div>
+            <div className="checkout-section">
+              <button className="checkout-btn" onClick={onCheckout}>
+                Finalizar Pedido • {formatPrice(finalTotal)}
+              </button>
             </div>
-
-            <button className="checkout-btn">
-              Finalizar Pedido
-            </button>
           </>
         )}
       </div>
