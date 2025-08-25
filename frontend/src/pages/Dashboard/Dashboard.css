@@ -1,0 +1,19 @@
+.dashboard {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.dashboard-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  font-size: 18px;
+  color: #64748b;
+  font-weight: 500;
+}
